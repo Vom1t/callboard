@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "callboard"
+version = "0.0.1"
+description = "Доска ]: Сайт доска обявлений"
+authors = ["dev"]
+license = "no"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+psycopg2-binary = "^2.9.5"
+pillow = "^9.4.0"
+djangorestframework = "^3.14.0"
+djangorestframework-simplejwt = "^5.2.2"
+pytest = "^7.2.1"
+pytest-factoryboy = "^2.5.1"
+drf-spectacular = "^0.25.1"
+django-cors-headers = "^3.13.0"
+django-phonenumber-field = "^7.0.2"
+phonenumbers = "^8.13.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
