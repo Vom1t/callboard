@@ -18,6 +18,9 @@ drf-spectacular = "^0.25.1"
 django-cors-headers = "^3.13.0"
 django-phonenumber-field = "^7.0.2"
 phonenumbers = "^8.13.4"
+djoser = "^2.1.0"
+django-rest-framework-redocs = "^0.0.8"
+django-filter = "^22.1"
 
 
 [build-system]

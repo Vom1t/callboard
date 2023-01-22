@@ -3,6 +3,9 @@ from django.db import models
 
 
 class Ad(models.Model):
+    image = models.ImageField(
+        upload_to='images/ad/'
+    )
 
     title = models.CharField(
         max_length=100,
@@ -21,16 +24,48 @@ class Ad(models.Model):
     )
 
     author = models.ForeignKey(
-        settings.AUTH_USER.MODEL,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         verbose_name='Автор'
     )
 
-    created_at
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Время создания объявления',
+    )
+
+    class Meta:
+        verbose_name = 'Объявление'
+        verbose_name_plural = 'Объявления'
+        ordering = ('-created_at',)
 
 
 class Comment(models.Model):
-    text
-    author
-    ad
-    created_at
+    text = models.CharField(
+        max_length=1500,
+        verbose_name='Комментарий'
+    )
+
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='comments',
+        verbose_name='Автор комментария'
+    )
+
+    ad = models.ForeignKey(
+        Ad,
+        on_delete=models.CASCADE,
+        related_name='comments',
+        verbose_name='Объявление'
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Время написания комментария'
+    )
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+        ordering = ("-created_at",)

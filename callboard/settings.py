@@ -38,10 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'djoser',
     'rest_framework_simplejwt',
     'drf_spectacular',
     'corsheaders',
+    'django_filters',
     'user',
+    'ad',
 
 
 ]
@@ -129,9 +132,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "django_static")
 
 MEDIA_URL = '/media_data/'
-
 MEDIA_ROOT = os.path.join(BASE_DIR, "media_files")
 
 # Default primary key field type
@@ -141,7 +144,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 3,
+    'PAGE_SIZE': 10,
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
@@ -155,9 +158,15 @@ SPECTACULAR_SETTING = {
     "VERSION": "0.0.1",
 }
 
-CORS_ORIGIN_WHITELIST = [
-    "http://127.0.0.1:8000/",
-    "http://localhost:8000/",
-]
+CORS_ORIGIN_ALLOW_ALL = True
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+DJOSER = {
+    'SERIALIZERS': {
+        'user_create': 'users.serializers.UserRegistrationSerializer'
+    },
+    'LOGIN_FIELD': 'email'
+}
 
 AUTH_USER_MODEL = 'user.User'

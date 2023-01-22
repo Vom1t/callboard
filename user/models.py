@@ -1,6 +1,9 @@
 from django.contrib.auth.models import AbstractUser
+
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
+
+from user.managers import UserManager
 
 
 class UserRoles:
@@ -14,6 +17,7 @@ class UserRoles:
 
 
 class User(AbstractUser):
+    objects = UserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'phone', "role"]
@@ -33,7 +37,7 @@ class User(AbstractUser):
                             default="user",
                             verbose_name='Роль')
 
-    image = models.ImageField(upload_to='pictures',
+    image = models.ImageField(upload_to='images/user/',
                               null=True,
                               blank=True)
 
